@@ -176,4 +176,4 @@ pytest
 
 ## Auteur
 
-Manus AI
+NKONO EBONG LOUIS CHARLES 
