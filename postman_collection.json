@@ -1,0 +1,153 @@
+{
+  "info": {
+    "_postman_id": "{{$guid}}",
+    "name": "XAF Fake Bill Detector API",
+    "description": "Collection Postman pour tester l'API de détection de faux billets XAF.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Denominations",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/analyze/denominations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analyze",
+            "denominations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Analyze Bill - Upload File",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/path/to/your/bill.jpg"
+            },
+            {
+              "key": "denomination",
+              "value": "10000",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/analyze/upload",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analyze",
+            "upload"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Analyze Bill - Webcam (Base64)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-API-Key",
+            "value": "{{api_key}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"image_base64\": \"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==\",\n    \"denomination\": \"10000\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/analyze/webcam",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "analyze",
+            "webcam"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Code à exécuter avant chaque requête (ex: génération de token)"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Code à exécuter après chaque requête (ex: vérification des statuts)"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "XAF_SECURE_KEY_2026",
+      "type": "string"
+    }
+  ]
+}
